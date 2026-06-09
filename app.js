@@ -1,0 +1,207 @@
+/**
+ * Harshal Engineering Services (HES) - Core Application Script
+ * Orchestrates: Header states, dark/light theme, scroll-reveal, stats counting,
+ * academy card preview, interactive CAESAR II simulator, marketing console,
+ * clipboard copy, and contact form flow.
+ * Design: Dark Industrial / Gold Accent (gridlinelab style)
+ */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* ==========================================================================
+       0. ANNOUNCEMENT BAR DISMISS
+       ========================================================================== */
+    const announcementBar = document.getElementById("announcementBar");
+    const annClose        = document.getElementById("annClose");
+
+    if (annClose && announcementBar) {
+        annClose.addEventListener("click", () => {
+            announcementBar.classList.add("hidden");
+            document.body.classList.add("ann-dismissed");
+        });
+    }
+
+    /* ==========================================================================
+       1. HEADER STICKY STATE & MOBILE MENU TOGGLE
+       ========================================================================== */
+    const mainHeader = document.getElementById("mainHeader");
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const navMenu = document.getElementById("navMenu");
+    
+    // Sticky Header Scroll Event
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 40) {
+            mainHeader.classList.add("scrolled");
+        } else {
+            mainHeader.classList.remove("scrolled");
+        }
+    });
+    
+    // Mobile Nav Menu Toggle
+    if (mobileMenuBtn && navMenu) {
+        const menuOpenIcon  = mobileMenuBtn.querySelector('.menu-open');
+        const menuCloseIcon = mobileMenuBtn.querySelector('.menu-close');
+
+        mobileMenuBtn.addEventListener("click", () => {
+            const isOpen = navMenu.classList.toggle("mobile-open");
+            if (menuOpenIcon)  menuOpenIcon.style.display  = isOpen ? 'none'         : 'inline-block';
+            if (menuCloseIcon) menuCloseIcon.style.display = isOpen ? 'inline-block' : 'none';
+        });
+        
+        // Close menu on click of nav link
+        const navLinks = navMenu.querySelectorAll(".nav-link, .btn-header");
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                navMenu.classList.remove("mobile-open");
+                if (menuOpenIcon)  menuOpenIcon.style.display  = 'inline-block';
+                if (menuCloseIcon) menuCloseIcon.style.display = 'none';
+            });
+        });
+    }
+
+    /* ==========================================================================
+       1b. SCROLL-REVEAL ANIMATION (Intersection Observer)
+       ========================================================================== */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ==========================================================================
+       1c. ACTIVE NAV LINK HIGHLIGHT ON SCROLL
+       ========================================================================== */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinkEls = document.querySelectorAll('.nav-link');
+    const activateNavLink = () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+        });
+        navLinkEls.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+        });
+    };
+    window.addEventListener('scroll', activateNavLink, { passive: true });
+
+    /* ==========================================================================
+       2. LIGHT / DARK THEME TOGGLE WITH LOCAL STORAGE
+       ========================================================================== */
+    const themeToggle = document.getElementById("themeToggle");
+    
+    // Check local storage or system default
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.remove("light-theme");
+        document.body.classList.add("dark-theme");
+    } else {
+        document.body.classList.remove("dark-theme");
+        document.body.classList.add("light-theme");
+    }
+    
+    themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("light-theme");
+        document.body.classList.toggle("dark-theme");
+        
+        const currentTheme = document.body.classList.contains("light-theme") ? "light" : "dark";
+        localStorage.setItem("theme", currentTheme);
+    });
+
+    /* ==========================================================================
+       3. ANIMATED STATISTICS COUNTER ON SCROLL
+       ========================================================================== */
+    const statNumbers = document.querySelectorAll(".stat-number");
+    let statsAnimated = false;
+    
+    const animateStats = () => {
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute("data-target"), 10);
+            const suffix = stat.getAttribute("data-suffix") || '';
+            stat.innerText = '0';
+            const countUp = () => {
+                const count = parseInt(stat.innerText, 10);
+                const speed = Math.ceil(target / 40);
+                if (count < target) {
+                    stat.innerText = Math.min(count + speed, target) + suffix;
+                    setTimeout(countUp, 30);
+                } else {
+                    stat.innerText = target + suffix;
+                }
+            };
+            countUp();
+        });
+    };
+    
+    // Intersection Observer for scroll triggers
+    const statsSection = document.getElementById("stats");
+    if (statsSection) {
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    animateStats();
+                    statsAnimated = true;
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        statsObserver.observe(statsSection);
+    }
+
+    /* ==========================================================================
+       Training Academy, Simulator, and Marketing sections removed from app.js.
+       ========================================================================== */
+
+    /* ==========================================================================
+       8. CONTACT FORM SIMULATION & SUCCESS SCREEN
+       ========================================================================== */
+    const hesContactForm = document.getElementById("hesContactForm");
+    const formSuccessScreen = document.getElementById("formSuccessScreen");
+    const btnResetForm = document.getElementById("btnResetForm");
+    const btnSubmitForm = document.getElementById("btnSubmitForm");
+    
+    if (hesContactForm) {
+        hesContactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            // Show loading spinner
+            const submitText = btnSubmitForm.querySelector(".submit-text");
+            const submitSpinner = btnSubmitForm.querySelector(".submit-spinner");
+            
+            submitText.classList.add("hidden");
+            submitSpinner.classList.remove("hidden");
+            btnSubmitForm.disabled = true;
+            
+            // Simulate direct submission delay (1.5 seconds)
+            setTimeout(() => {
+                // Reset submit button state
+                submitText.classList.remove("hidden");
+                submitSpinner.classList.add("hidden");
+                btnSubmitForm.disabled = false;
+                
+                // Switch forms
+                hesContactForm.classList.add("hidden");
+                formSuccessScreen.classList.remove("hidden");
+                
+                // Scroll form container into view nicely
+                document.getElementById("contactFormContainer").scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
+        });
+    }
+    
+    // Reset Form button
+    if (btnResetForm) {
+        btnResetForm.addEventListener("click", () => {
+            hesContactForm.reset();
+            formSuccessScreen.classList.add("hidden");
+            hesContactForm.classList.remove("hidden");
+        });
+    }
+});

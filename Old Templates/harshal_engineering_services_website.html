@@ -1,0 +1,468 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#1D9E75;--teal-light:#E1F5EE;--teal-dark:#085041;
+  --green:#639922;--green-light:#EAF3DE;
+  --gray:#5F5E5A;--gray-light:#F1EFE8;
+  --text:#2C2C2A;--text-muted:#888780;
+  --white:#fff;--border:rgba(0,0,0,0.09);
+}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+.playfair{font-family:'Playfair Display',serif}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:0.5px solid var(--border);padding:0 2rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-icon{width:36px;height:36px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.nav-logo-icon svg{width:20px;height:20px;fill:white}
+.nav-brand{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--teal-dark);line-height:1.2}
+.nav-brand span{display:block;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:400;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gray);text-decoration:none;cursor:pointer;transition:color 0.2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{background:var(--teal);color:white;border:none;padding:8px 20px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;transition:background 0.2s}
+.nav-cta:hover{background:var(--teal-dark)}
+
+/* SECTIONS */
+section{scroll-margin-top:64px}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#04342C 0%,#085041 40%,#0F6E56 100%);position:relative;overflow:hidden;padding-top:64px}
+.hero-bg{position:absolute;inset:0;opacity:0.07}
+.hero-bg svg{width:100%;height:100%}
+.hero-content{max-width:1100px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(29,158,117,0.3);border:1px solid rgba(29,158,117,0.5);color:#9FE1CB;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:#5DCAA5;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+h1.hero-title{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:white;line-height:1.15;margin-bottom:1rem}
+h1.hero-title em{color:#5DCAA5;font-style:normal}
+.hero-subtitle{font-size:1rem;color:#9FE1CB;line-height:1.7;margin-bottom:2rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:#1D9E75;color:white;border:none;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{background:#5DCAA5;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:white;border:1px solid rgba(255,255,255,0.3);padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.btn-outline:hover{border-color:white;background:rgba(255,255,255,0.1)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.stat-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:1.25rem;text-align:center}
+.stat-number{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:white}
+.stat-label{font-size:11px;color:#9FE1CB;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.hero-visual{position:relative}
+.hero-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:2rem;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-card-title{color:#9FE1CB;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem}
+.service-chip{display:inline-block;background:rgba(29,158,117,0.25);color:#5DCAA5;padding:5px 12px;border-radius:100px;font-size:12px;margin:3px;border:1px solid rgba(93,202,165,0.3)}
+.hero-founding{color:rgba(255,255,255,0.4);font-size:11px;text-align:center;margin-top:1rem}
+
+/* ABOUT */
+#about{padding:6rem 2rem;background:var(--gray-light)}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:0.75rem}
+h2.section-title{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--teal-dark);margin-bottom:1.5rem;line-height:1.2}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.about-text p{color:var(--gray);line-height:1.8;margin-bottom:1rem;font-size:0.95rem}
+.about-highlight{background:white;border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:1.25rem 1.5rem;margin:1.5rem 0;font-style:italic;color:var(--teal-dark);font-size:0.95rem}
+.info-grid{display:grid;gap:1rem}
+.info-card{background:white;border-radius:12px;padding:1.25rem;display:flex;align-items:start;gap:1rem;border:0.5px solid var(--border)}
+.info-icon{width:40px;height:40px;border-radius:8px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.info-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:2px}
+.info-value{font-size:14px;font-weight:500;color:var(--teal-dark)}
+
+/* SERVICES */
+#services{padding:6rem 2rem;background:white}
+.services-intro{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;margin-bottom:3rem}
+.services-desc{color:var(--gray);line-height:1.8;font-size:0.95rem}
+.services-tabs{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.tab-btn{padding:8px 18px;border-radius:100px;border:1px solid var(--border);background:white;font-size:13px;cursor:pointer;font-weight:500;color:var(--gray);transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.tab-btn.active,.tab-btn:hover{background:var(--teal);color:white;border-color:var(--teal)}
+.services-panel{display:none}
+.services-panel.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.service-card{background:var(--gray-light);border-radius:12px;padding:1.5rem;border:0.5px solid var(--border);transition:all 0.2s;cursor:default}
+.service-card:hover{background:var(--teal-light);border-color:var(--teal);transform:translateY(-2px)}
+.service-card h4{font-size:15px;font-weight:500;color:var(--teal-dark);margin-bottom:0.5rem}
+.service-card p{font-size:13px;color:var(--gray);line-height:1.6}
+.service-card-icon{width:32px;height:32px;background:var(--teal-light);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;font-size:16px}
+.service-card:hover .service-card-icon{background:white}
+
+/* CAPABILITIES */
+#capabilities{padding:6rem 2rem;background:#04342C}
+#capabilities .section-tag{color:#5DCAA5}
+#capabilities h2.section-title{color:white}
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:3rem}
+.cap-item{border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.5rem;text-align:center;transition:all 0.2s}
+.cap-item:hover{background:rgba(255,255,255,0.07);border-color:rgba(93,202,165,0.5)}
+.cap-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:#5DCAA5}
+.cap-desc{font-size:13px;color:#9FE1CB;margin-top:6px}
+
+/* PROCESS */
+#process{padding:6rem 2rem;background:var(--gray-light)}
+.process-steps{display:flex;gap:0;margin-top:3rem;position:relative}
+.process-steps::before{content:'';position:absolute;top:24px;left:24px;right:24px;height:2px;background:linear-gradient(90deg,var(--teal),var(--green));z-index:0}
+.process-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;padding:0 0.5rem}
+.step-circle{width:48px;height:48px;border-radius:50%;background:white;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--teal);margin-bottom:1rem;transition:all 0.3s}
+.process-step:hover .step-circle{background:var(--teal);color:white}
+.step-title{font-size:13px;font-weight:500;color:var(--teal-dark);margin-bottom:6px}
+.step-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+
+/* CLIENTS */
+#clients{padding:6rem 2rem;background:white}
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:3rem}
+.client-chip{background:var(--gray-light);border-radius:8px;padding:0.75rem 1rem;font-size:13px;font-weight:500;color:var(--teal-dark);text-align:center;border:0.5px solid var(--border);transition:all 0.2s;cursor:default}
+.client-chip:hover{background:var(--teal-light);border-color:var(--teal);transform:translateY(-1px)}
+.clients-note{font-size:13px;color:var(--text-muted);text-align:center;margin-top:1.5rem}
+
+/* CONTACT */
+#contact{padding:6rem 2rem;background:#04342C}
+#contact .section-tag{color:#5DCAA5}
+#contact h2.section-title{color:white}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
+.contact-info{display:grid;gap:1.25rem}
+.contact-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:1.25rem;display:flex;align-items:start;gap:1rem}
+.contact-card-icon{width:40px;height:40px;border-radius:8px;background:rgba(29,158,117,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact-card-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#5DCAA5;margin-bottom:4px}
+.contact-card-value{font-size:14px;color:white;font-weight:400}
+.contact-form{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:2rem}
+.form-row{margin-bottom:1.25rem}
+.form-label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#9FE1CB;margin-bottom:8px}
+.form-input{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 14px;font-size:14px;color:white;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.form-input::placeholder{color:rgba(255,255,255,0.3)}
+.form-input:focus{border-color:#5DCAA5}
+textarea.form-input{height:100px;resize:none}
+.form-btn{width:100%;background:#1D9E75;color:white;border:none;padding:14px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.form-btn:hover{background:#5DCAA5}
+.form-success{display:none;text-align:center;padding:2rem;color:#5DCAA5;font-size:15px}
+
+/* FOOTER */
+footer{background:#04342C;border-top:1px solid rgba(255,255,255,0.1);padding:2rem;text-align:center}
+footer p{font-size:12px;color:rgba(255,255,255,0.4)}
+footer strong{color:#5DCAA5}
+
+/* SCROLL ANIMATION */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.fade-in.visible{opacity:1;transform:none}
+
+@media(max-width:768px){
+  h1.hero-title{font-size:2.2rem}
+  .hero-content,.about-grid,.services-intro,.contact-grid{grid-template-columns:1fr}
+  .process-steps{flex-direction:column;gap:1.5rem}
+  .process-steps::before{display:none}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+
+<h2 class="sr-only">Harshal Engineering Services — interactive company profile website</h2>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm0-14a6 6 0 0 0-4.47 10l1.42-1.42a4 4 0 1 1 6.1 0l1.42 1.42A6 6 0 0 0 12 6z"/></svg>
+      </div>
+      <div class="nav-brand">Harshal Engineering<span>Services</span></div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="scrollTo('about')">About</a></li>
+      <li><a onclick="scrollTo('services')">Services</a></li>
+      <li><a onclick="scrollTo('clients')">Clients</a></li>
+      <li><a onclick="scrollTo('contact')">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="scrollTo('contact')">Get in Touch</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="300" fill="white" opacity="0.3"/>
+      <circle cx="1000" cy="600" r="400" fill="white" opacity="0.2"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="600" y1="0" x2="600" y2="800" stroke="white" stroke-width="0.5"/>
+      <rect x="100" y="100" width="200" height="200" fill="none" stroke="white" stroke-width="0.5" transform="rotate(15,200,200)"/>
+      <rect x="800" y="400" width="300" height="300" fill="none" stroke="white" stroke-width="0.5" transform="rotate(-10,950,550)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div>Est. 1996 · Dombivli, Maharashtra</div>
+      <h1 class="hero-title">Detail Engineering for <em>Chemical Plants</em> & Process Industries</h1>
+      <p class="hero-subtitle">Harshal Engineering Services delivers precision-engineered solutions across piping, mechanical, civil, and instrumentation disciplines — trusted by 40+ industry leaders over 3 decades.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="scrollTo('services')">Explore Services</button>
+        <button class="btn-outline" onclick="scrollTo('contact')">Request Proposal</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card"><div class="stat-number">28+</div><div class="stat-label">Years Active</div></div>
+        <div class="stat-card"><div class="stat-number">100+</div><div class="stat-label">Projects Done</div></div>
+        <div class="stat-card"><div class="stat-number">40+</div><div class="stat-label">Major Clients</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-title">Core Disciplines</div>
+        <div>
+          <span class="service-chip">Piping Engineering</span>
+          <span class="service-chip">Mechanical Design</span>
+          <span class="service-chip">Civil/Structural</span>
+          <span class="service-chip">Process Engineering</span>
+          <span class="service-chip">Instrumentation</span>
+          <span class="service-chip">CAD/3D Modelling</span>
+          <span class="service-chip">PDMS/PDS</span>
+          <span class="service-chip">Inspection & QC</span>
+          <span class="service-chip">Stress Analysis</span>
+        </div>
+        <div class="hero-founding" style="margin-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem">
+          Contact: Waman M. Nerkar · hesengg66@gmail.com · +91 93247 91566
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-tag fade-in">Company Overview</div>
+    <h2 class="section-title fade-in">Engineering Excellence <br>Since 1996</h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>Harshal Engineering Services (HES) is a detailed engineering firm founded in 1996, specializing in Project Execution Services for Small & Medium size Petrochemical, Refinery, Oil & Gas, Bulk Drugs, Pharma, Heavy Chemicals, Dye & Dye-Intermediate Plants, and Power Projects.</p>
+        <p>Over the years, HES has expanded to offer a total range of Detailed Engineering, Inspection and Expediting, Drawing Conversion to CAD, Construction Supervision and Management, Manpower Deputation, and Recruitment for Client & Project Management Services.</p>
+        <div class="about-highlight">"In more than a decade, our company has completed over 100 projects in the field of Detail Engineering with reputed Consulting & Client companies."</div>
+        <p>Our work spans Piping, Mechanical, Civil, Electrical, and Instrumentation fields — backed by 20 AutoCAD workstations and 4 CAESAR II (v4.4) piping stress analysis software licenses.</p>
+      </div>
+      <div class="info-grid fade-in">
+        <div class="info-card">
+          <div class="info-icon">🏢</div>
+          <div><div class="info-label">Registered Office</div><div class="info-value">001, Surajmani CHS Ltd., Near Ellora Society, G. Cross Gupate Road, Dombivali (W), Dist. Thane – 421 202</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <div><div class="info-label">Telephone / Fax</div><div class="info-value">0251-2492 062 &nbsp;|&nbsp; Cell: +91 93247 91566</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">✉️</div>
+          <div><div class="info-label">Email</div><div class="info-value">hesengg66@gmail.com · hes6666@gmail.com</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🖥️</div>
+          <div><div class="info-label">Infrastructure</div><div class="info-value">20 AutoCAD Workstations · 4 CAESAR II (v4.4) Licenses</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">👤</div>
+          <div><div class="info-label">Contact Person</div><div class="info-value">Waman M. Nerkar (Director – Technical)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="services-intro">
+      <div>
+        <div class="section-tag fade-in">What We Do</div>
+        <h2 class="section-title fade-in">Comprehensive Engineering Services</h2>
+      </div>
+      <div class="services-desc fade-in">
+        <p>HES delivers end-to-end engineering solutions from concept through construction. Our multi-disciplinary teams handle every phase of a project lifecycle — from basic engineering to detailed design, inspection, and site support.</p>
+      </div>
+    </div>
+    <div class="services-tabs fade-in">
+      <button class="tab-btn active" onclick="showTab('piping',this)">Piping Engineering</button>
+      <button class="tab-btn" onclick="showTab('process',this)">Process Engineering</button>
+      <button class="tab-btn" onclick="showTab('civil',this)">Civil/Structural</button>
+      <button class="tab-btn" onclick="showTab('equipment',this)">Equipment</button>
+      <button class="tab-btn" onclick="showTab('misc',this)">Other Services</button>
+    </div>
+    <div id="tab-piping" class="services-panel active fade-in">
+      <div class="service-card"><div class="service-card-icon">📐</div><h4>Equipment Layout</h4><p>Detailed equipment layout and section drawings for plant areas.</p></div>
+      <div class="service-card"><div class="service-card-icon">🔧</div><h4>Piping GA Drawings</h4><p>Piping general arrangement drawings with complete specifications.</p></div>
+      <div class="service-card"><div class="service-card-icon">📏</div><h4>Isometrics & Stress</h4><p>Isometric drawings for all lines &gt;2" dia. with stress checks using CAESAR II.</p></div>
+      <div class="service-card"><div class="service-card-icon">📋</div><h4>Material Take-Off</h4><p>Bulk, intermediate and detailed MTOs for pipe and pipe fittings.</p></div>
+      <div class="service-card"><div class="service-card-icon">⚙️</div><h4>Pipe Support Design</h4><p>Mechanical pipe support design and detailing per project requirements.</p></div>
+      <div class="service-card"><div class="service-card-icon">📄</div><h4>Line Lists & Specs</h4><p>Line lists, piping installation specs, and contract documents.</p></div>
+    </div>
+    <div id="tab-process" class="services-panel fade-in">
+      <div class="service-card"><div class="service-card-icon">🗂️</div><h4>P&ID Development</h4><p>Process & Instrumentation Diagrams for all process and utility systems.</p></div>
+      <div class="service-card"><div class="service-card-icon">📊</div><h4>Process Data Sheets</h4><p>Utility unit and equipment data sheets with full process parameters.</p></div>
+      <div class="service-card"><div class="service-card-icon">🔌</div><h4>Instrument Specs</h4><p>Instrument specifications, hook-up diagrams, and block interlock diagrams.</p></div>
+      <div class="service-card"><div class="service-card-icon">⚡</div><h4>Electrical MTO</h4><p>Cable/trench GA layouts, cable schedules, and electrical MTO.</p></div>
+    </div>
+    <div id="tab-civil" class="services-panel fade-in">
+      <div class="service-card"><div class="service-card-icon">🏗️</div><h4>Structural Design</h4><p>Buildings, platforms, foundations, superstructure and staircase design.</p></div>
+      <div class="service-card"><div class="service-card-icon">🏛️</div><h4>Equipment Foundations</h4><p>Design and drawing for all equipment foundations and structural supports.</p></div>
+      <div class="service-card"><div class="service-card-icon">🛣️</div><h4>Roads & Drainage</h4><p>Road, trench, storm water drain, sewage drain and concrete flooring design.</p></div>
+      <div class="service-card"><div class="service-card-icon">📐</div><h4>GA for Approvals</h4><p>General arrangement drawings with detail for statutory approvals.</p></div>
+    </div>
+    <div id="tab-equipment" class="services-panel fade-in">
+      <div class="service-card"><div class="service-card-icon">🔩</div><h4>Mechanical Design</h4><p>Mechanical design and detail drawings of fabricated equipment incl. weights.</p></div>
+      <div class="service-card"><div class="service-card-icon">🌡️</div><h4>Heat Exchangers</h4><p>Thermal and process details for tube sheets, tube pitch, baffle spacing.</p></div>
+      <div class="service-card"><div class="service-card-icon">🏺</div><h4>Vessels & Reactors</h4><p>Tanks, vessels, reactors and column design with full internal details.</p></div>
+      <div class="service-card"><div class="service-card-icon">📦</div><h4>Packaged Units</h4><p>Design parameters, specifications and technical appraisal for packaged units.</p></div>
+    </div>
+    <div id="tab-misc" class="services-panel fade-in">
+      <div class="service-card"><div class="service-card-icon">🖥️</div><h4>CAD Conversion</h4><p>2D drafting, detailing, digital/PDF/image conversion to CAD.</p></div>
+      <div class="service-card"><div class="service-card-icon">👷</div><h4>Manpower Services</h4><p>Technical manpower on payroll and project-basis deputation.</p></div>
+      <div class="service-card"><div class="service-card-icon">🔍</div><h4>Inspection & Expediting</h4><p>Material inspection, vendor expediting and quality monitoring.</p></div>
+      <div class="service-card"><div class="service-card-icon">🏗️</div><h4>Construction Supervision</h4><p>Site supervision and management for construction and installation.</p></div>
+      <div class="service-card"><div class="service-card-icon">🎯</div><h4>Pre-Bid Engineering</h4><p>Pre-bid proposal engineering support for project tendering.</p></div>
+      <div class="service-card"><div class="service-card-icon">🔄</div><h4>Reverse Engineering</h4><p>Reverse engineering services for existing equipment and systems.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-inner">
+    <div class="section-tag fade-in">Infrastructure & Capacity</div>
+    <h2 class="section-title fade-in">Built to Deliver at Scale</h2>
+    <div class="cap-grid fade-in">
+      <div class="cap-item"><div class="cap-num">20</div><div class="cap-desc">AutoCAD Workstations</div></div>
+      <div class="cap-item"><div class="cap-num">4</div><div class="cap-desc">CAESAR II Stress Analysis</div></div>
+      <div class="cap-item"><div class="cap-num">5</div><div class="cap-desc">Engineering Disciplines</div></div>
+      <div class="cap-item"><div class="cap-num">100+</div><div class="cap-desc">Projects Completed</div></div>
+      <div class="cap-item"><div class="cap-num">28+</div><div class="cap-desc">Years of Experience</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div class="section-tag fade-in">How We Work</div>
+    <h2 class="section-title fade-in">Our Engineering Process</h2>
+    <div class="process-steps fade-in">
+      <div class="process-step"><div class="step-circle">1</div><div class="step-title">Concept Development</div><div class="step-desc">Understand project scope and basic engineering inputs</div></div>
+      <div class="process-step"><div class="step-circle">2</div><div class="step-title">Engineering Design</div><div class="step-desc">Develop P&IDs, layouts, and specifications</div></div>
+      <div class="process-step"><div class="step-circle">3</div><div class="step-title">Analysis & Simulation</div><div class="step-desc">Stress analysis, simulation, and technical appraisal</div></div>
+      <div class="process-step"><div class="step-circle">4</div><div class="step-title">Detailed Design</div><div class="step-desc">Full engineering drawings, MTOs, and documentation</div></div>
+      <div class="process-step"><div class="step-circle">5</div><div class="step-title">Testing & Review</div><div class="step-desc">Prototyping, vendor review, and quality checks</div></div>
+      <div class="process-step"><div class="step-circle">6</div><div class="step-title">Site Support</div><div class="step-desc">Construction supervision and handover</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="section-inner">
+    <div class="section-tag fade-in">Our Clients</div>
+    <h2 class="section-title fade-in">Trusted by Industry Leaders</h2>
+    <div class="clients-grid fade-in">
+      <div class="client-chip">Hindustan Lever Ltd.</div>
+      <div class="client-chip">L&T Limited</div>
+      <div class="client-chip">Sterlite Industries</div>
+      <div class="client-chip">Vedanta Ltd.</div>
+      <div class="client-chip">BPCL Mumbai</div>
+      <div class="client-chip">Rallis India Ltd.</div>
+      <div class="client-chip">Kvaerner Powergas</div>
+      <div class="client-chip">SNC-Lavalin India</div>
+      <div class="client-chip">Mott MacDonald</div>
+      <div class="client-chip">Dalal Consultants</div>
+      <div class="client-chip">Toyo Engg. India</div>
+      <div class="client-chip">EID Parry Ltd.</div>
+      <div class="client-chip">Aditya Birla Group</div>
+      <div class="client-chip">Shell India Markets</div>
+      <div class="client-chip">PunjLloyd Ltd.</div>
+      <div class="client-chip">Intech Aromatic</div>
+      <div class="client-chip">Rising International</div>
+      <div class="client-chip">Petron Civil Engg.</div>
+      <div class="client-chip">German Remedies</div>
+      <div class="client-chip">Elder Pharma Ltd.</div>
+      <div class="client-chip">Sadhana Nitro Chem</div>
+      <div class="client-chip">Metro-Chem Ltd.</div>
+      <div class="client-chip">Akarui Solutions</div>
+      <div class="client-chip">Shroff Associates</div>
+    </div>
+    <div class="clients-note fade-in">And 20+ more across Pharma, Chemicals, Oil & Gas, and Power sectors across India</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-tag fade-in">Get In Touch</div>
+    <h2 class="section-title fade-in">Let's Work Together</h2>
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <div class="contact-card">
+          <div class="contact-card-icon">🏢</div>
+          <div><div class="contact-card-label">Office Address</div><div class="contact-card-value">001, Surajmani CHS Ltd., Near Ellora Society, G. Cross Gupate Road, Dombivali (W), Dist. Thane – 421 202</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📞</div>
+          <div><div class="contact-card-label">Phone / Fax</div><div class="contact-card-value">0251-2492 062</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📱</div>
+          <div><div class="contact-card-label">Mobile</div><div class="contact-card-value">+91 93247 91566</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">✉️</div>
+          <div><div class="contact-card-label">Email</div><div class="contact-card-value">hesengg66@gmail.com<br>hes6666@gmail.com</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">👤</div>
+          <div><div class="contact-card-label">Contact Person</div><div class="contact-card-value">Waman M. Nerkar</div></div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="contact-form" id="contact-form">
+          <div class="form-row">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" id="fname" placeholder="Full name">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" id="femail" placeholder="you@company.com">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-input" id="fsubject" placeholder="Engineering Enquiry / Proposal Request">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" id="fmessage" placeholder="Briefly describe your project requirements..."></textarea>
+          </div>
+          <button class="form-btn" onclick="submitForm()">Send Message</button>
+        </div>
+        <div class="form-success" id="form-success">
+          <div style="font-size:2rem;margin-bottom:1rem">✓</div>
+          <div style="color:white;font-size:16px;margin-bottom:0.5rem">Message sent!</div>
+          <div style="color:#9FE1CB;font-size:13px">We'll get back to you shortly.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Harshal Engineering Services</strong> · Dombivali, Maharashtra · Est. 1996 · All Rights Reserved</p>
+</footer>
+
+<script>
+function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+
+function showTab(id,btn){
+  document.querySelectorAll('.services-panel').forEach(p=>p.classList.remove('active'))
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'))
+  document.getElementById('tab-'+id).classList.add('active')
+  btn.classList.add('active')
+}
+
+function submitForm(){
+  var n=document.getElementById('fname').value
+  var e=document.getElementById('femail').value
+  if(!n||!e){alert('Please fill in your name and email.');return}
+  document.getElementById('contact-form').style.display='none'
+  document.getElementById('form-success').style.display='block'
+}
+
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible')}})
+},{threshold:0.1})
+document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el)})
+</script>

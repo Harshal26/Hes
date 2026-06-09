@@ -1,0 +1,560 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Source Serif 4',Georgia,serif;background:#0A0D0F;color:#E8E2D4;overflow-x:hidden}
+
+/* DESIGN TOKENS */
+:root{
+  --steel:#1A2332;--steel-mid:#243044;--steel-light:#2E3D54;
+  --amber:#C8870A;--amber-bright:#E8A020;--amber-pale:#F5D080;
+  --rust:#8B3A1E;--rust-bright:#B8501F;
+  --pipe:#4A5568;--pipe-light:#718096;
+  --cream:#E8E2D4;--cream-dim:#B8B0A0;--cream-ghost:#6B6560;
+  --black:#0A0D0F;--near-black:#0F1418;
+  --yellow-accent:#F0C040;
+  --border-steel:rgba(74,85,104,0.4);
+  --border-amber:rgba(200,135,10,0.35);
+}
+
+/* UTILITY */
+.oswald{font-family:'Oswald',sans-serif}
+.mono{font-family:'Share Tech Mono',monospace}
+.amber{color:var(--amber-bright)}
+.cream{color:var(--cream)}
+
+/* ── STICKY NAV ── */
+.nav{position:sticky;top:0;z-index:999;background:rgba(10,13,15,0.97);border-bottom:1px solid var(--border-steel)}
+.nav-wrap{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{display:flex;align-items:center;gap:12px;cursor:pointer}
+.nav-logo-mark{width:38px;height:38px;background:var(--amber);display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:22px;height:22px;fill:#0A0D0F}
+.nav-brand-text{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;letter-spacing:1px;color:var(--cream);line-height:1.1}
+.nav-brand-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:2px;text-transform:uppercase}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links li a{font-family:'Oswald',sans-serif;font-size:13px;font-weight:400;letter-spacing:1px;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;padding:0 1.1rem;height:60px;display:flex;align-items:center;cursor:pointer;transition:color 0.2s;border-right:1px solid var(--border-steel)}
+.nav-links li:first-child a{border-left:1px solid var(--border-steel)}
+.nav-links li a:hover{color:var(--amber-bright)}
+.nav-cta{background:var(--amber);color:#0A0D0F;font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:9px 22px;border:none;cursor:pointer;transition:background 0.2s}
+.nav-cta:hover{background:var(--amber-bright)}
+
+/* ── HERO ── */
+.hero{background:#0F1418;min-height:92vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(74,85,104,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(74,85,104,0.08) 1px,transparent 1px);background-size:60px 60px}
+.hero-pipe-v{position:absolute;right:14%;top:0;bottom:0;width:4px;background:var(--steel-mid)}
+.hero-pipe-v2{position:absolute;right:calc(14% + 40px);top:0;bottom:0;width:2px;background:var(--steel-light);opacity:0.4}
+.hero-pipe-h{position:absolute;right:0;left:0;top:38%;height:3px;background:var(--steel-mid)}
+.hero-pipe-dot{position:absolute;right:calc(14% - 10px);top:calc(38% - 10px);width:24px;height:24px;background:var(--amber);border-radius:50%}
+.hero-pipe-dot2{position:absolute;right:calc(14% - 6px);top:calc(38% - 6px);width:16px;height:16px;background:#0F1418;border-radius:50%;border:2px solid var(--amber)}
+.hero-inner{max-width:1200px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:center;position:relative;z-index:2}
+.hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--amber);text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';display:inline-block;width:30px;height:1px;background:var(--amber)}
+.hero-h1{font-family:'Oswald',sans-serif;font-size:4rem;font-weight:700;line-height:1.05;letter-spacing:1px;color:var(--cream);margin-bottom:1.5rem;text-transform:uppercase}
+.hero-h1 span{color:var(--amber-bright);display:block}
+.hero-body{font-size:1rem;color:var(--cream-dim);line-height:1.8;margin-bottom:2rem;font-weight:300;max-width:500px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn-amber{background:var(--amber);color:#0A0D0F;font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:13px 30px;border:none;cursor:pointer;transition:background 0.2s}
+.btn-amber:hover{background:var(--amber-bright)}
+.btn-ghost{background:transparent;color:var(--cream);font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;border:1px solid var(--border-steel);cursor:pointer;transition:all 0.2s}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border-steel)}
+.h-stat{padding:1.25rem 1rem;text-align:center;border-right:1px solid var(--border-steel)}
+.h-stat:last-child{border-right:none}
+.h-stat-n{font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;color:var(--amber-bright);line-height:1}
+.h-stat-l{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--cream-ghost);text-transform:uppercase;margin-top:6px}
+.hero-right{border:1px solid var(--border-steel);background:var(--near-black)}
+.hero-card-header{background:var(--steel);padding:0.875rem 1.25rem;border-bottom:1px solid var(--border-steel);display:flex;align-items:center;gap:10px}
+.hero-card-header-dot{width:8px;height:8px;background:var(--amber)}
+.hero-card-header-title{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--amber);text-transform:uppercase}
+.hero-card-body{padding:1.5rem}
+.discipline-row{display:flex;align-items:center;gap:10px;padding:0.6rem 0;border-bottom:1px solid rgba(74,85,104,0.2)}
+.discipline-row:last-child{border-bottom:none}
+.d-bar-wrap{flex:1;height:3px;background:var(--steel-mid)}
+.d-bar{height:3px;background:var(--amber);transition:width 0.8s ease}
+.d-label{font-family:'Oswald',sans-serif;font-size:13px;font-weight:400;letter-spacing:0.5px;color:var(--cream-dim);min-width:160px}
+.d-pct{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--amber);min-width:36px;text-align:right}
+
+/* ── SECTION COMMON ── */
+.section{padding:6rem 2rem}
+.s-inner{max-width:1200px;margin:0 auto}
+.s-eyebrow{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--amber);text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:8px}
+.s-eyebrow::before{content:'//';color:var(--amber);margin-right:4px}
+.s-title{font-family:'Oswald',sans-serif;font-size:2.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--cream);line-height:1.1;margin-bottom:0.5rem}
+.s-rule{width:60px;height:3px;background:var(--amber);margin-bottom:1.75rem}
+.s-desc{font-size:1rem;color:var(--cream-dim);line-height:1.8;font-weight:300;max-width:640px}
+.dark-section{background:#0F1418}
+.mid-section{background:var(--steel)}
+.light-section{background:#111820}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3.5rem;align-items:start}
+.about-body p{font-size:0.95rem;color:var(--cream-dim);line-height:1.9;margin-bottom:1rem;font-weight:300}
+.about-pull{border-left:3px solid var(--amber);padding:1rem 1.5rem;margin:1.75rem 0;font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:400;color:var(--amber-pale);letter-spacing:0.5px;line-height:1.5}
+.about-facts{display:grid;gap:0}
+.fact-row{display:flex;gap:0;border-bottom:1px solid var(--border-steel)}
+.fact-row:first-child{border-top:1px solid var(--border-steel)}
+.fact-key{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--amber);text-transform:uppercase;padding:1rem 1.25rem;background:var(--steel);min-width:140px;display:flex;align-items:center}
+.fact-val{font-size:13px;color:var(--cream-dim);padding:1rem 1.25rem;line-height:1.6;display:flex;align-items:center}
+
+/* ── SERVICES ── */
+.services-tabs{display:flex;gap:0;margin-bottom:0;border-bottom:1px solid var(--border-steel);margin-top:2.5rem;flex-wrap:wrap}
+.stab{font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--cream-ghost);padding:12px 22px;border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;transition:all 0.2s;font-family:'Oswald',sans-serif}
+.stab:hover{color:var(--cream)}
+.stab.active{color:var(--amber-bright);border-bottom-color:var(--amber-bright)}
+.spanel{display:none;padding-top:2.5rem}
+.spanel.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem}
+.scard{background:var(--steel);border:1px solid var(--border-steel);padding:1.5rem;transition:all 0.2s;cursor:default}
+.scard:hover{border-color:var(--amber);background:var(--steel-mid)}
+.scard-num{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:2px;margin-bottom:0.75rem}
+.scard-title{font-family:'Oswald',sans-serif;font-size:16px;font-weight:500;letter-spacing:0.5px;color:var(--cream);margin-bottom:0.5rem}
+.scard-desc{font-size:13px;color:var(--cream-ghost);line-height:1.6;font-weight:300}
+
+/* ── SECTORS ── */
+.sector-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;margin-top:3rem;background:var(--border-steel)}
+.sector-cell{background:#0F1418;padding:1.75rem 1.25rem;text-align:center;transition:background 0.2s}
+.sector-cell:hover{background:var(--steel)}
+.sector-icon{font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:var(--amber);margin-bottom:0.5rem}
+.sector-name{font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--cream-dim);margin-bottom:4px}
+.sector-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cream-ghost);letter-spacing:1px}
+
+/* ── PROCESS ── */
+.process-wrap{margin-top:3.5rem;display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+.process-wrap::before{content:'';position:absolute;top:28px;left:8%;right:8%;height:2px;background:var(--border-steel);z-index:0}
+.pstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 0.5rem;position:relative;z-index:1}
+.pstep-circle{width:56px;height:56px;background:var(--steel);border:2px solid var(--border-steel);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;transition:all 0.3s}
+.pstep:hover .pstep-circle{border-color:var(--amber);background:var(--steel-mid)}
+.pstep-num{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700;color:var(--amber)}
+.pstep-title{font-family:'Oswald',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;color:var(--cream);margin-bottom:4px}
+.pstep-desc{font-size:11px;color:var(--cream-ghost);line-height:1.5;font-weight:300}
+
+/* ── METRICS ── */
+.metrics-strip{background:var(--amber);padding:4rem 2rem}
+.metrics-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.metric-block{padding:2rem;text-align:center;background:var(--amber)}
+.metric-n{font-family:'Oswald',sans-serif;font-size:3.5rem;font-weight:700;color:#0A0D0F;line-height:1}
+.metric-l{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:#412402;text-transform:uppercase;margin-top:8px}
+
+/* ── CLIENTS ── */
+.clients-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;margin-top:3rem;background:var(--border-steel)}
+.client-cell{background:#0F1418;padding:1rem 1.25rem;font-family:'Oswald',sans-serif;font-size:13px;font-weight:400;letter-spacing:0.5px;color:var(--cream-dim);transition:all 0.2s;cursor:default;display:flex;align-items:center;gap:8px}
+.client-cell::before{content:'';display:inline-block;width:5px;height:5px;background:var(--amber);flex-shrink:0}
+.client-cell:hover{background:var(--steel);color:var(--cream)}
+.client-sector-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--amber);text-transform:uppercase;margin-top:0.5rem;display:flex;align-items:center;gap:6px;margin-bottom:2rem}
+.client-sector-tag::before{content:'';flex:none;width:20px;height:1px;background:var(--amber)}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3.5rem;align-items:start}
+.contact-details{display:grid;gap:0}
+.cdetail{display:flex;gap:1rem;align-items:start;padding:1.25rem 0;border-bottom:1px solid var(--border-steel)}
+.cdetail:first-child{border-top:1px solid var(--border-steel)}
+.cdetail-key{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;min-width:90px;padding-top:2px}
+.cdetail-val{font-size:14px;color:var(--cream-dim);line-height:1.6}
+.contact-form-wrap{background:var(--steel);border:1px solid var(--border-steel);padding:2.5rem}
+.cform-title{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--cream);margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border-amber)}
+.flabel{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;display:block;margin-bottom:8px}
+.finput{width:100%;background:var(--steel-mid);border:1px solid var(--border-steel);color:var(--cream);font-family:'Source Serif 4',serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color 0.2s;margin-bottom:1.25rem}
+.finput::placeholder{color:var(--cream-ghost)}
+.finput:focus{border-color:var(--amber)}
+textarea.finput{height:100px;resize:none}
+.fsubmit{width:100%;background:var(--amber);color:#0A0D0F;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:background 0.2s;margin-top:0.5rem}
+.fsubmit:hover{background:var(--amber-bright)}
+.fsuccess{display:none;text-align:center;padding:2.5rem 1rem}
+.fsuccess-icon{font-family:'Oswald',sans-serif;font-size:3rem;font-weight:700;color:var(--amber);margin-bottom:1rem}
+.fsuccess-msg{font-family:'Oswald',sans-serif;font-size:1.2rem;color:var(--cream);letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem}
+.fsuccess-sub{font-size:13px;color:var(--cream-ghost)}
+
+/* ── FOOTER ── */
+.footer{background:#060809;padding:3rem 2rem;border-top:1px solid var(--border-steel)}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;align-items:start}
+.footer-brand{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:0.75rem}
+.footer-tagline{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--cream-ghost);text-transform:uppercase;margin-bottom:1rem}
+.footer-about{font-size:13px;color:var(--cream-ghost);line-height:1.7;font-weight:300}
+.footer-col-title{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border-amber)}
+.footer-links{list-style:none;display:grid;gap:0.4rem}
+.footer-links li{font-size:13px;color:var(--cream-ghost);cursor:pointer;transition:color 0.2s;font-weight:300}
+.footer-links li:hover{color:var(--amber)}
+.footer-bottom{max-width:1200px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border-steel);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--cream-ghost);text-transform:uppercase}
+.footer-est{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--amber);text-transform:uppercase}
+
+/* ── SCROLL FADE ── */
+.fi{opacity:0;transform:translateY(24px);transition:opacity 0.65s,transform 0.65s}
+.fi.in{opacity:1;transform:none}
+</style>
+
+<h2 class="sr-only">Harshal Engineering Services — full interactive industrial website with navigation, services, clients and contact</h2>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-wrap">
+    <div class="nav-logo" onclick="gotoSection('hero')">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+      </div>
+      <div>
+        <div class="nav-brand-text">Harshal Engineering</div>
+        <div class="nav-brand-sub">Services · Est. 1996</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="gotoSection('about')">About</a></li>
+      <li><a onclick="gotoSection('services')">Services</a></li>
+      <li><a onclick="gotoSection('sectors')">Sectors</a></li>
+      <li><a onclick="gotoSection('clients')">Clients</a></li>
+      <li><a onclick="gotoSection('contact')">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="gotoSection('contact')">Request Proposal</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-pipe-v"></div>
+  <div class="hero-pipe-v2"></div>
+  <div class="hero-pipe-h"></div>
+  <div class="hero-pipe-dot"></div>
+  <div class="hero-pipe-dot2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Detail Engineering · Process Industries</div>
+      <h1 class="hero-h1">Engineering<span>The Backbone of Industry</span></h1>
+      <p class="hero-body">Harshal Engineering Services delivers precision detail engineering for chemical plants, petrochemical refineries, pharma facilities, and power projects — backed by 28+ years of proven execution across India's leading industries.</p>
+      <div class="hero-btns">
+        <button class="btn-amber" onclick="gotoSection('services')">Our Services</button>
+        <button class="btn-ghost" onclick="gotoSection('contact')">Get a Proposal</button>
+      </div>
+      <div class="hero-stats">
+        <div class="h-stat"><div class="h-stat-n">28+</div><div class="h-stat-l">Years Active</div></div>
+        <div class="h-stat"><div class="h-stat-n">100+</div><div class="h-stat-l">Projects</div></div>
+        <div class="h-stat"><div class="h-stat-n">40+</div><div class="h-stat-l">Major Clients</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-right">
+        <div class="hero-card-header">
+          <div class="hero-card-header-dot"></div>
+          <div class="hero-card-header-title">Engineering Disciplines — Active Capacity</div>
+        </div>
+        <div class="hero-card-body" id="disc-chart"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section dark-section">
+  <div class="s-inner">
+    <div class="fi">
+      <div class="s-eyebrow">Company Profile</div>
+      <div class="s-title">Who We Are</div>
+      <div class="s-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-body fi">
+        <p>Harshal Engineering Services (HES) is a detail engineering firm founded in 1996, headquartered in Dombivali, Maharashtra. We specialize in full-cycle project execution services for small and medium-scale petrochemical, refinery, oil &amp; gas, bulk drugs, pharma, heavy chemicals, dye &amp; dye-intermediate, and power projects.</p>
+        <p>Over more than two decades, we have expanded to offer the complete range of detailed engineering, inspection and expediting, drawing conversion to CAD, construction supervision and management, manpower deputation, and recruitment for client &amp; project management services across Piping, Mechanical, Civil, Electrical, and Instrumentation fields.</p>
+        <div class="about-pull">"More than 100 projects completed with reputed consulting &amp; client companies across India."</div>
+        <p>Our infrastructure includes 20 AutoCAD workstations and 4 dedicated CAESAR II (v4.4) piping stress analysis software seats — enabling us to handle complex multi-discipline projects with speed and rigour.</p>
+      </div>
+      <div class="about-facts fi">
+        <div class="fact-row"><div class="fact-key">Founded</div><div class="fact-val">1996 — Dombivali, Maharashtra</div></div>
+        <div class="fact-row"><div class="fact-key">Specialty</div><div class="fact-val">Detail Engineering &amp; Project Execution for Process Industries</div></div>
+        <div class="fact-row"><div class="fact-key">Contact</div><div class="fact-val">Waman M. Nerkar — Director Technical</div></div>
+        <div class="fact-row"><div class="fact-key">Address</div><div class="fact-val">001, Surajmani CHS Ltd., Near Ellora Society, G. Cross Gupate Rd., Dombivali (W), Dist. Thane – 421 202</div></div>
+        <div class="fact-row"><div class="fact-key">Phone</div><div class="fact-val">0251-2492 062 &nbsp;·&nbsp; +91 93247 91566</div></div>
+        <div class="fact-row"><div class="fact-key">Email</div><div class="fact-val">hesengg66@gmail.com &nbsp;·&nbsp; hes6666@gmail.com</div></div>
+        <div class="fact-row"><div class="fact-key">Software</div><div class="fact-val">20 AutoCAD Workstations · 4 CAESAR II v4.4 (Piping Stress)</div></div>
+        <div class="fact-row"><div class="fact-key">Scope</div><div class="fact-val">Basic Engineering · Detail Engineering · Inspection · CAD Conversion · Construction Supervision</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS STRIP -->
+<div class="metrics-strip fi">
+  <div class="metrics-inner">
+    <div class="metric-block"><div class="metric-n">28+</div><div class="metric-l">Years of Experience</div></div>
+    <div class="metric-block"><div class="metric-n">100+</div><div class="metric-l">Projects Completed</div></div>
+    <div class="metric-block"><div class="metric-n">40+</div><div class="metric-l">Major Industry Clients</div></div>
+    <div class="metric-block"><div class="metric-n">5</div><div class="metric-l">Engineering Disciplines</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="section light-section">
+  <div class="s-inner">
+    <div class="fi">
+      <div class="s-eyebrow">Scope of Work</div>
+      <div class="s-title">Services Offered</div>
+      <div class="s-rule"></div>
+      <p class="s-desc">End-to-end engineering solutions spanning all phases — from basic data compilation through detailed design, drawing production, inspection, and site construction support.</p>
+    </div>
+    <div class="services-tabs fi" id="stabs">
+      <button class="stab active" onclick="showTab('piping',this)">Piping Engg.</button>
+      <button class="stab" onclick="showTab('process',this)">Process Engg.</button>
+      <button class="stab" onclick="showTab('civil',this)">Civil / Structural</button>
+      <button class="stab" onclick="showTab('equipment',this)">Equipment</button>
+      <button class="stab" onclick="showTab('instrument',this)">Instrumentation</button>
+      <button class="stab" onclick="showTab('misc',this)">Support Services</button>
+    </div>
+    <div id="sp-piping" class="spanel active fi">
+      <div class="scard"><div class="scard-num">// 01</div><div class="scard-title">Equipment Layout Drawings</div><div class="scard-desc">Detailed equipment layout and section drawings to define plant area configurations.</div></div>
+      <div class="scard"><div class="scard-num">// 02</div><div class="scard-title">Piping GA Drawings</div><div class="scard-desc">General arrangement drawings for all process and utility piping systems.</div></div>
+      <div class="scard"><div class="scard-num">// 03</div><div class="scard-title">Isometric Drawings</div><div class="scard-desc">Isometrics for all lines above 2" dia.; smaller lines at discretion of engineer.</div></div>
+      <div class="scard"><div class="scard-num">// 04</div><div class="scard-title">Pipe Stress Analysis</div><div class="scard-desc">CAESAR II–based stress checks where required by design or code requirements.</div></div>
+      <div class="scard"><div class="scard-num">// 05</div><div class="scard-title">Material Take-Off (MTO)</div><div class="scard-desc">Bulk, intermediate and detailed MTOs for pipe and pipe fittings.</div></div>
+      <div class="scard"><div class="scard-num">// 06</div><div class="scard-title">Pipe Support Design</div><div class="scard-desc">Design and detailing of mechanical pipe supports per project standards.</div></div>
+      <div class="scard"><div class="scard-num">// 07</div><div class="scard-title">Line Lists</div><div class="scard-desc">Complete line lists with service, rating, insulation, and fluid classification.</div></div>
+      <div class="scard"><div class="scard-num">// 08</div><div class="scard-title">Vendor Appraisal</div><div class="scard-desc">Technical appraisal of up to three quotations with vendor recommendations.</div></div>
+    </div>
+    <div id="sp-process" class="spanel fi">
+      <div class="scard"><div class="scard-num">// 01</div><div class="scard-title">P&amp;ID Development</div><div class="scard-desc">Piping &amp; Instrumentation Diagrams for all process and utility units with full design data.</div></div>
+      <div class="scard"><div class="scard-num">// 02</div><div class="scard-title">Process Data Sheets</div><div class="scard-desc">Data sheets for utility units, equipment, and packaged system parameters.</div></div>
+      <div class="scard"><div class="scard-num">// 03</div><div class="scard-title">Utility Balancing</div><div class="scard-desc">Compile utility requirements for process units and off-sites; determine capacities.</div></div>
+      <div class="scard"><div class="scard-num">// 04</div><div class="scard-title">Pre-Bid Engineering</div><div class="scard-desc">Pre-bid proposal engineering to support project tendering and bidding.</div></div>
+    </div>
+    <div id="sp-civil" class="spanel fi">
+      <div class="scard"><div class="scard-num">// 01</div><div class="scard-title">Structural Design</div><div class="scard-desc">Buildings, platforms, foundations, superstructures, staircases, and ladders.</div></div>
+      <div class="scard"><div class="scard-num">// 02</div><div class="scard-title">Equipment Foundations</div><div class="scard-desc">Foundation design and drawings for all plant equipment.</div></div>
+      <div class="scard"><div class="scard-num">// 03</div><div class="scard-title">Roads &amp; Drainage</div><div class="scard-desc">Road, trench, storm water drain, sewage drain, and concrete flooring design.</div></div>
+      <div class="scard"><div class="scard-num">// 04</div><div class="scard-title">GA for Approvals</div><div class="scard-desc">General arrangement drawings with adequate detail for statutory approvals.</div></div>
+      <div class="scard"><div class="scard-num">// 05</div><div class="scard-title">Insulation &amp; Painting</div><div class="scard-desc">Spec preparation, bulk MTO, and contract documents for insulation/painting.</div></div>
+    </div>
+    <div id="sp-equipment" class="spanel fi">
+      <div class="scard"><div class="scard-num">// 01</div><div class="scard-title">Mechanical Design</div><div class="scard-desc">Detail engineering drawings of fabricated equipment with empty weights and installation specs.</div></div>
+      <div class="scard"><div class="scard-num">// 02</div><div class="scard-title">Heat Exchangers</div><div class="scard-desc">Thermal and process design for tube sheets, tube pitch, baffle spacing, and nozzle sizing.</div></div>
+      <div class="scard"><div class="scard-num">// 03</div><div class="scard-title">Vessels &amp; Reactors</div><div class="scard-desc">Tanks, vessels, reactors, and column design with dimensions and internal details.</div></div>
+      <div class="scard"><div class="scard-num">// 04</div><div class="scard-title">Packaged Units</div><div class="scard-desc">Design parameters and specs; vendor review for compliance with space requirements.</div></div>
+    </div>
+    <div id="sp-instrument" class="spanel fi">
+      <div class="scard"><div class="scard-num">// 01</div><div class="scard-title">Instrument Specifications</div><div class="scard-desc">Basic spec for control loops, variables, material, interlocks, and safety conditions.</div></div>
+      <div class="scard"><div class="scard-num">// 02</div><div class="scard-title">Hook-Up Diagrams</div><div class="scard-desc">Instrument hook-up and block interlock diagrams for all control points.</div></div>
+      <div class="scard"><div class="scard-num">// 03</div><div class="scard-title">Cable Schedules</div><div class="scard-desc">Cable / trench general arrangement layouts and cable schedule documentation.</div></div>
+      <div class="scard"><div class="scard-num">// 04</div><div class="scard-title">Electrical MTO</div><div class="scard-desc">Material take-off for all electrical items and components.</div></div>
+    </div>
+    <div id="sp-misc" class="spanel fi">
+      <div class="scard"><div class="scard-num">// 01</div><div class="scard-title">CAD Conversion</div><div class="scard-desc">2D drafting, detailing, digital/PDF/image conversion to AutoCAD format.</div></div>
+      <div class="scard"><div class="scard-num">// 02</div><div class="scard-title">Technical Manpower</div><div class="scard-desc">Skilled engineering staff on payroll or project-basis deputation across disciplines.</div></div>
+      <div class="scard"><div class="scard-num">// 03</div><div class="scard-title">Inspection &amp; Expediting</div><div class="scard-desc">Material inspection, vendor expediting, and quality monitoring at site/workshop.</div></div>
+      <div class="scard"><div class="scard-num">// 04</div><div class="scard-title">Construction Supervision</div><div class="scard-desc">On-site supervision and management during construction and commissioning phases.</div></div>
+      <div class="scard"><div class="scard-num">// 05</div><div class="scard-title">Reverse Engineering</div><div class="scard-desc">Reverse engineering services for existing plant equipment and systems.</div></div>
+      <div class="scard"><div class="scard-num">// 06</div><div class="scard-title">Mechanical Data Books</div><div class="scard-desc">Preparation of mechanical data books based on vendor-supplied information.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors" class="section dark-section">
+  <div class="s-inner">
+    <div class="fi">
+      <div class="s-eyebrow">Industries Served</div>
+      <div class="s-title">Sectors We Serve</div>
+      <div class="s-rule"></div>
+    </div>
+    <div class="sector-grid fi">
+      <div class="sector-cell"><div class="sector-icon">⚗</div><div class="sector-name">Petrochemical</div><div class="sector-sub">Refineries · Crackers</div></div>
+      <div class="sector-cell"><div class="sector-icon">⛽</div><div class="sector-name">Oil &amp; Gas</div><div class="sector-sub">Upstream · Midstream</div></div>
+      <div class="sector-cell"><div class="sector-icon">💊</div><div class="sector-name">Pharma</div><div class="sector-sub">Bulk Drugs · APIs</div></div>
+      <div class="sector-cell"><div class="sector-icon">🧪</div><div class="sector-name">Chemicals</div><div class="sector-sub">Heavy Chem · Dyes</div></div>
+      <div class="sector-cell"><div class="sector-icon">⚡</div><div class="sector-name">Power</div><div class="sector-sub">Thermal · Utilities</div></div>
+      <div class="sector-cell"><div class="sector-icon">🏭</div><div class="sector-name">Fertilizers</div><div class="sector-sub">Nitrogen · Phosphate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="section light-section">
+  <div class="s-inner">
+    <div class="fi">
+      <div class="s-eyebrow">Methodology</div>
+      <div class="s-title">Engineering Process</div>
+      <div class="s-rule"></div>
+    </div>
+    <div class="process-wrap fi">
+      <div class="pstep"><div class="pstep-circle"><div class="pstep-num">01</div></div><div class="pstep-title">Concept</div><div class="pstep-desc">Scope definition &amp; basic engineering inputs</div></div>
+      <div class="pstep"><div class="pstep-circle"><div class="pstep-num">02</div></div><div class="pstep-title">Engineering Design</div><div class="pstep-desc">P&amp;IDs, layouts &amp; specifications</div></div>
+      <div class="pstep"><div class="pstep-circle"><div class="pstep-num">03</div></div><div class="pstep-title">Analysis</div><div class="pstep-desc">Stress, simulation &amp; technical appraisal</div></div>
+      <div class="pstep"><div class="pstep-circle"><div class="pstep-num">04</div></div><div class="pstep-title">Detail Design</div><div class="pstep-desc">Full drawings, MTOs &amp; documentation</div></div>
+      <div class="pstep"><div class="pstep-circle"><div class="pstep-num">05</div></div><div class="pstep-title">Review &amp; QC</div><div class="pstep-desc">Vendor review, QC &amp; approval</div></div>
+      <div class="pstep"><div class="pstep-circle"><div class="pstep-num">06</div></div><div class="pstep-title">Site Support</div><div class="pstep-desc">Construction supervision &amp; handover</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients" class="section dark-section">
+  <div class="s-inner">
+    <div class="fi">
+      <div class="s-eyebrow">Track Record</div>
+      <div class="s-title">Our Clients</div>
+      <div class="s-rule"></div>
+      <p class="s-desc">Trusted by India's leading engineering consultancies and industrial houses across chemical, pharma, petrochemical, and infrastructure sectors.</p>
+    </div>
+    <div class="client-sector-tag fi">Major Projects — Partial Listing</div>
+    <div class="clients-list fi">
+      <div class="client-cell">Hindustan Lever Ltd.</div>
+      <div class="client-cell">Larsen &amp; Toubro Ltd.</div>
+      <div class="client-cell">Sterlite Industries</div>
+      <div class="client-cell">Vedanta Ltd.</div>
+      <div class="client-cell">BPCL Mumbai</div>
+      <div class="client-cell">Rallis India Ltd.</div>
+      <div class="client-cell">Kvaerner Powergas</div>
+      <div class="client-cell">SNC-Lavalin India</div>
+      <div class="client-cell">Mott MacDonald</div>
+      <div class="client-cell">Dalal Consultants</div>
+      <div class="client-cell">Toyo Engg. India</div>
+      <div class="client-cell">EID Parry Ltd.</div>
+      <div class="client-cell">Aditya Birla Group</div>
+      <div class="client-cell">Shell India Markets</div>
+      <div class="client-cell">PunjLloyd Ltd.</div>
+      <div class="client-cell">Intech Aromatic</div>
+      <div class="client-cell">Rising International</div>
+      <div class="client-cell">Petron Civil Engg.</div>
+      <div class="client-cell">German Remedies</div>
+      <div class="client-cell">Elder Pharma</div>
+      <div class="client-cell">Sadhana Nitro Chem</div>
+      <div class="client-cell">Metro-Chem Ltd.</div>
+      <div class="client-cell">Akarui Solutions LLP</div>
+      <div class="client-cell">Shroff Associates</div>
+      <div class="client-cell">R.J. Associates</div>
+      <div class="client-cell">Chemtex Global Engg.</div>
+      <div class="client-cell">IOT India Ltd.</div>
+      <div class="client-cell">SMS Paryavaran</div>
+      <div class="client-cell">Technophil Engineers</div>
+      <div class="client-cell">RMEC Project Ltd.</div>
+      <div class="client-cell">Gargi Huttenes</div>
+      <div class="client-cell">Drasti Chemical</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section light-section">
+  <div class="s-inner">
+    <div class="fi">
+      <div class="s-eyebrow">Enquiries</div>
+      <div class="s-title">Get In Touch</div>
+      <div class="s-rule"></div>
+      <p class="s-desc">Ready to discuss your project requirements? Send us your enquiry and our team will respond promptly with a tailored proposal.</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-details fi">
+        <div class="cdetail"><div class="cdetail-key">Office</div><div class="cdetail-val">001, Surajmani CHS Ltd., Near Ellora Society, G. Cross Gupate Road, Dombivali (W), Dist. Thane – 421 202, Maharashtra</div></div>
+        <div class="cdetail"><div class="cdetail-key">Phone</div><div class="cdetail-val">0251-2492 062</div></div>
+        <div class="cdetail"><div class="cdetail-key">Mobile</div><div class="cdetail-val">+91 93247 91566</div></div>
+        <div class="cdetail"><div class="cdetail-key">Email</div><div class="cdetail-val">hesengg66@gmail.com<br>hes6666@gmail.com</div></div>
+        <div class="cdetail"><div class="cdetail-key">Contact</div><div class="cdetail-val">Waman M. Nerkar<br>Director — Technical</div></div>
+        <div class="cdetail"><div class="cdetail-key">Software</div><div class="cdetail-val">AutoCAD (20 seats) · CAESAR II v4.4 (4 seats)</div></div>
+      </div>
+      <div class="fi">
+        <div class="contact-form-wrap" id="cform">
+          <div class="cform-title">Send an Enquiry</div>
+          <label class="flabel">Full Name</label>
+          <input class="finput" id="fn" type="text" placeholder="Your full name">
+          <label class="flabel">Email Address</label>
+          <input class="finput" id="fe" type="email" placeholder="your@company.com">
+          <label class="flabel">Organisation</label>
+          <input class="finput" id="fo" type="text" placeholder="Company / consultancy name">
+          <label class="flabel">Project Brief</label>
+          <textarea class="finput" id="fm" placeholder="Describe your engineering requirements..."></textarea>
+          <button class="fsubmit" onclick="submitEnq()">Submit Enquiry</button>
+        </div>
+        <div class="fsuccess" id="fsuc">
+          <div class="fsuccess-icon">&#10003;</div>
+          <div class="fsuccess-msg">Enquiry Received</div>
+          <div class="fsuccess-sub">Our team will respond within 24 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Harshal Engineering Services</div>
+      <div class="footer-tagline">Detail Engineering &amp; Process Industry Consultancy</div>
+      <p class="footer-about">Founded 1996 · Dombivali, Maharashtra · Delivering precision engineering for chemical plants, refineries, pharma, and power projects across India for over 28 years.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li onclick="gotoSection('about')">About HES</li>
+        <li onclick="gotoSection('services')">Services</li>
+        <li onclick="gotoSection('sectors')">Sectors</li>
+        <li onclick="gotoSection('clients')">Client List</li>
+        <li onclick="gotoSection('contact')">Contact &amp; Enquiry</li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Disciplines</div>
+      <ul class="footer-links">
+        <li>Piping Engineering</li>
+        <li>Process Engineering</li>
+        <li>Civil / Structural</li>
+        <li>Equipment Design</li>
+        <li>Instrumentation &amp; Electrical</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2024 Harshal Engineering Services · All Rights Reserved</div>
+    <div class="footer-est">Est. 1996 · Dombivali, Maharashtra</div>
+  </div>
+</div>
+
+<script>
+function gotoSection(id){
+  var el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+
+function showTab(id,btn){
+  document.querySelectorAll('.spanel').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.stab').forEach(function(b){b.classList.remove('active')});
+  var sp=document.getElementById('sp-'+id);
+  if(sp) sp.classList.add('active');
+  btn.classList.add('active');
+}
+
+function submitEnq(){
+  var n=document.getElementById('fn').value.trim();
+  var e=document.getElementById('fe').value.trim();
+  if(!n||!e){alert('Please enter your name and email to proceed.');return;}
+  document.getElementById('cform').style.display='none';
+  document.getElementById('fsuc').style.display='block';
+}
+
+var disciplines=[
+  {label:'Piping Engineering',pct:95},
+  {label:'Process Engineering',pct:85},
+  {label:'Civil / Structural',pct:80},
+  {label:'Equipment Design',pct:78},
+  {label:'Instrumentation',pct:72},
+  {label:'CAD 2D / 3D (PDMS/PDS)',pct:90}
+];
+var dc=document.getElementById('disc-chart');
+if(dc){
+  var html='';
+  disciplines.forEach(function(d){
+    html+='<div class="discipline-row"><span class="d-label">'+d.label+'</span><div class="d-bar-wrap"><div class="d-bar" data-w="'+d.pct+'" style="width:0%"></div></div><span class="d-pct">'+d.pct+'%</span></div>';
+  });
+  dc.innerHTML=html;
+}
+
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting) en.target.classList.add('in');
+  });
+},{threshold:0.08});
+document.querySelectorAll('.fi').forEach(function(el){obs.observe(el);});
+
+setTimeout(function(){
+  document.querySelectorAll('.d-bar').forEach(function(b){
+    b.style.width=b.getAttribute('data-w')+'%';
+  });
+},600);
+</script>
