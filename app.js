@@ -8,18 +8,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ==========================================================================
-       0. ANNOUNCEMENT BAR DISMISS
-       ========================================================================== */
-    const announcementBar = document.getElementById("announcementBar");
-    const annClose        = document.getElementById("annClose");
 
-    if (annClose && announcementBar) {
-        annClose.addEventListener("click", () => {
-            announcementBar.classList.add("hidden");
-            document.body.classList.add("ann-dismissed");
-        });
-    }
 
     /* ==========================================================================
        1. HEADER STICKY STATE & MOBILE MENU TOGGLE
@@ -167,10 +156,63 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnResetForm = document.getElementById("btnResetForm");
     const btnSubmitForm = document.getElementById("btnSubmitForm");
     
+    // Toast Notification utility
+    const toastNotification = document.getElementById("toastNotification");
+    const toastTitle = toastNotification ? toastNotification.querySelector(".toast-title") : null;
+    const toastMessage = document.getElementById("toastMessage");
+    const toastIcon = toastNotification ? toastNotification.querySelector(".toast-icon") : null;
+    let toastTimeout = null;
+
+    const showToast = (title, message, type = "success") => {
+        if (!toastNotification) return;
+
+        // Reset previous timeout
+        if (toastTimeout) {
+            clearTimeout(toastTimeout);
+        }
+
+        // Set text
+        if (toastTitle) toastTitle.textContent = title;
+        if (toastMessage) toastMessage.textContent = message;
+
+        // Apply theme/type classes
+        toastNotification.className = "toast-toast"; // base class
+        if (type === "error") {
+            toastNotification.classList.add("toast-error");
+            if (toastIcon) {
+                toastIcon.className = "ph ph-x-circle toast-icon";
+            }
+        } else {
+            // Default uses the gold/yellow theme of the website
+            if (toastIcon) {
+                toastIcon.className = "ph ph-check-circle toast-icon";
+            }
+        }
+
+        // Show toast
+        toastNotification.classList.remove("hidden");
+
+        // Auto hide after 4 seconds
+        toastTimeout = setTimeout(() => {
+            toastNotification.classList.add("hidden");
+        }, 4000);
+    };
+
     if (hesContactForm) {
         hesContactForm.addEventListener("submit", (e) => {
             e.preventDefault();
             
+            // Validate access key config
+            const accessKeyInput = hesContactForm.querySelector('input[name="access_key"]');
+            if (!accessKeyInput || accessKeyInput.value === 'YOUR_ACCESS_KEY_HERE' || accessKeyInput.value.trim() === '') {
+                showToast(
+                    "Setup Required", 
+                    "Please replace YOUR_ACCESS_KEY_HERE with your Web3Forms key in index.html.", 
+                    "error"
+                );
+                return;
+            }
+
             // Show loading spinner
             const submitText = btnSubmitForm.querySelector(".submit-text");
             const submitSpinner = btnSubmitForm.querySelector(".submit-spinner");
@@ -179,20 +221,47 @@ document.addEventListener("DOMContentLoaded", () => {
             submitSpinner.classList.remove("hidden");
             btnSubmitForm.disabled = true;
             
-            // Simulate direct submission delay (1.5 seconds)
-            setTimeout(() => {
+            const formData = new FormData(hesContactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let resJson = await response.json();
+                if (response.status === 200) {
+                    // Switch forms
+                    hesContactForm.classList.add("hidden");
+                    formSuccessScreen.classList.remove("hidden");
+                    
+                    // Reset form
+                    hesContactForm.reset();
+                    
+                    // Scroll form container into view nicely
+                    document.getElementById("contactFormContainer").scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    showToast("Enquiry Sent", "We received your message and will respond within 24 hours.", "success");
+                } else {
+                    console.error("Submission failed: ", resJson);
+                    showToast("Submission Failed", resJson.message || "Failed to submit enquiry.", "error");
+                }
+            })
+            .catch(error => {
+                console.error("Network error: ", error);
+                showToast("Connection Error", "A network error occurred. Please check your internet connection.", "error");
+            })
+            .finally(() => {
                 // Reset submit button state
                 submitText.classList.remove("hidden");
                 submitSpinner.classList.add("hidden");
                 btnSubmitForm.disabled = false;
-                
-                // Switch forms
-                hesContactForm.classList.add("hidden");
-                formSuccessScreen.classList.remove("hidden");
-                
-                // Scroll form container into view nicely
-                document.getElementById("contactFormContainer").scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 1500);
+            });
         });
     }
     

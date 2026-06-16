@@ -2279,6 +2279,133 @@ body.light-theme .moon-icon { display: none; }
 .strategy-details { padding-right: 24px; }
 
 /* ==========================================================================
+   LOGO IMAGE (Header & Footer)
+   ========================================================================== */
+.logo-img {
+    display: block;
+    object-fit: contain;
+}
+
+.header-logo-img {
+    height: 50px;
+    width: auto;
+    transition: var(--transition);
+}
+
+.site-header.scrolled .header-logo-img {
+    height: 40px;
+}
+
+.footer-logo-img {
+    height: 75px;
+    width: auto;
+}
+
+/* Invert logo for dark theme readability (logo has dark navy text) */
+body.dark-theme .header-logo-img,
+body.dark-theme .footer-logo-img {
+    filter: brightness(1.5) contrast(1.1);
+}
+
+/* ==========================================================================
+   CLIENT LOGOS SECTION (Marquee)
+   ========================================================================== */
+.client-logos-section {
+    background-color: var(--bg-light);
+    padding: 100px 0 110px;
+    border-top: 1px solid var(--border-light);
+    overflow: hidden;
+}
+
+.logo-marquee-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 16px;
+    padding: 24px 0;
+}
+
+/* Edge fade gradients */
+.logo-marquee-gradient {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.logo-marquee-gradient-left {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-light) 0%, transparent 100%);
+}
+
+.logo-marquee-gradient-right {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-light) 0%, transparent 100%);
+}
+
+/* Marquee track */
+.logo-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    width: max-content;
+    animation: marquee-scroll 35s linear infinite;
+}
+
+.logo-marquee-wrapper:hover .logo-marquee-track {
+    animation-play-state: paused;
+}
+
+/* Individual logo item */
+.logo-marquee-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 70px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+}
+
+.logo-marquee-item img {
+    max-width: 90px;
+    max-height: 48px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.55);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-marquee-item:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--gold-dark);
+    box-shadow: 0 6px 24px rgba(var(--gold-rgb), 0.12);
+    transform: translateY(-4px) scale(1.05);
+}
+
+.logo-marquee-item:hover img {
+    filter: grayscale(0%) opacity(1);
+}
+
+/* Marquee keyframe */
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ==========================================================================
    CONTACT SECTION (DARK-2)
    ========================================================================== */
 .contact-section {
@@ -2411,10 +2538,11 @@ body.light-theme .moon-icon { display: none; }
     pointer-events: none;
     transition: var(--transition);
     background: var(--bg-dark-2);
-    padding: 0 4px;
+    padding: 0 6px;
     text-transform: none;
     letter-spacing: 0;
     font-weight: 400;
+    z-index: 1;
 }
 
 .floating-label-select {
@@ -2430,8 +2558,8 @@ body.light-theme .moon-icon { display: none; }
 .floating-input:focus ~ .floating-label,
 .floating-textarea:not(:placeholder-shown) ~ .floating-label,
 .floating-textarea:focus ~ .floating-label {
-    top: 10px;
-    transform: none;
+    top: 0;
+    transform: translateY(-50%);
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -2658,7 +2786,7 @@ body.light-theme .moon-icon { display: none; }
    ========================================================================== */
 .toast-toast {
     position: fixed;
-    bottom: 32px;
+    bottom: 104px;
     right: 32px;
     background: var(--bg-dark-3);
     border: 1px solid var(--border-gold);
@@ -2673,6 +2801,14 @@ body.light-theme .moon-icon { display: none; }
 }
 
 .toast-toast.hidden { display: none; }
+
+.toast-toast.toast-error {
+    border-color: #ef4444;
+}
+
+.toast-toast.toast-error .toast-icon {
+    color: #ef4444;
+}
 
 .toast-icon {
     font-size: 1.5rem;
@@ -2699,6 +2835,75 @@ body.light-theme .moon-icon { display: none; }
     text-transform: none;
     letter-spacing: 0;
     font-weight: 400;
+}
+
+/* Floating WhatsApp Button */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    background-color: #25d366;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 0 20px rgba(37, 211, 102, 0.3);
+    z-index: 9998;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.floating-whatsapp:hover {
+    transform: scale(1.1);
+    background-color: #20ba5a;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 30px rgba(37, 211, 102, 0.5);
+    color: #ffffff;
+}
+
+.floating-whatsapp::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(37, 211, 102, 0.3);
+    border-radius: 50%;
+    z-index: -1;
+    animation: wa-pulse 2s infinite;
+}
+
+@keyframes wa-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.whatsapp-tooltip {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background-color: var(--bg-dark-3);
+    border: 1px solid var(--border-gold);
+    color: var(--text-on-dark);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-dark);
+}
+
+.floating-whatsapp:hover .whatsapp-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
 }
 
 /* ==========================================================================
@@ -2830,7 +3035,7 @@ body.light-theme .moon-icon { display: none; }
     .container { padding: 0 20px; }
     .section-dark, .section-dark-2, .section-light, .section-light-2,
     .about-section, .services-section, .markets-section, .academy-section,
-    .simulator-section, .marketing-section, .contact-section { padding: 72px 0; }
+    .simulator-section, .marketing-section, .contact-section, .client-logos-section { padding: 72px 0; }
 
     .hero-title { font-size: 2.5rem; }
     .section-title, .section-title-dark { font-size: 1.8rem; }
@@ -2851,82 +3056,7 @@ body.light-theme .moon-icon { display: none; }
     .hero-visual-badge { left: 0; bottom: 20px; }
 }
 
-/* ==========================================================================
-   ANNOUNCEMENT BAR
-   ========================================================================== */
-.announcement-bar {
-    background: var(--gold);
-    color: var(--bg-dark);
-    padding: 10px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    position: relative;
-    z-index: 1001;
-    font-family: var(--font-body);
-    font-size: 0.82rem;
-    font-weight: 500;
-}
 
-.announcement-inner {
-    flex: 1;
-    overflow: hidden;
-}
-
-.announcement-ticker {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    white-space: nowrap;
-}
-
-.ann-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--bg-dark);
-    border-radius: 50%;
-    flex-shrink: 0;
-    animation: pulse 1.8s infinite;
-    box-shadow: 0 0 0 0 rgba(19,19,19,0.7);
-}
-
-.announcement-bar strong {
-    font-weight: 700;
-}
-
-.announcement-bar i {
-    font-size: 0.9rem;
-}
-
-.ann-close {
-    background: rgba(0,0,0,0.12);
-    border: none;
-    color: var(--bg-dark);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    flex-shrink: 0;
-    transition: var(--transition);
-}
-
-.ann-close:hover {
-    background: rgba(0,0,0,0.25);
-}
-
-.announcement-bar.hidden {
-    display: none;
-}
-
-/* Offset header when announcement bar is visible */
-body:not(.ann-dismissed) .site-header {
-    top: 40px;
-}
 
 /* ==========================================================================
    HERO QUICK-STATS ROW
@@ -3384,10 +3514,13 @@ body:not(.ann-dismissed) .site-header {
     .trust-logo-item { padding: 12px 16px; }
     .hero-float-card.top-card { right: 0; top: -10px; }
     .hero-float-card.bottom-card { left: 0; }
-    body:not(.ann-dismissed) .site-header { top: 0; }
-    .announcement-bar { font-size: 0.72rem; padding: 8px 16px; }
-    .announcement-ticker { white-space: normal; }
     .about-credentials { grid-template-columns: 1fr; }
+
+    /* Client logos marquee */
+    .logo-marquee-gradient { width: 60px; }
+    .logo-marquee-item { width: 100px; height: 56px; padding: 10px 12px; }
+    .logo-marquee-item img { max-width: 70px; max-height: 38px; }
+    .logo-marquee-track { gap: 36px; }
 }
 
 @media (max-width: 600px) {
@@ -3398,4 +3531,16 @@ body:not(.ann-dismissed) .site-header {
     .hero-qs-divider { display: none; }
     .hero-qs-item { border-right: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
     .hero-qs-item:nth-child(2), .hero-qs-item:nth-child(4) { border-right: none; }
+
+    /* Client logos at mobile */
+    .logo-marquee-gradient { width: 40px; }
+    .logo-marquee-item { width: 85px; height: 50px; padding: 8px 10px; border-radius: 6px; }
+    .logo-marquee-item img { max-width: 60px; max-height: 32px; }
+    .logo-marquee-track { gap: 24px; animation-duration: 25s; }
+    .client-logos-section { padding: 60px 0; }
+
+    /* Header logo */
+    .header-logo-img { height: 40px; }
+    .site-header.scrolled .header-logo-img { height: 32px; }
+    .footer-logo-img { height: 55px; }
 }
